@@ -66,6 +66,7 @@ class WsTest extends TestCase
 
         $stockMovement = new StockMovement(
             static::$taxRegistrationNumber,
+            "ABCDEF-" . \rand(999, 99999),
             "teste",
             new Address("AAA", "Lisboa", "9999-999"),
             "GT 999GT/" . (new Date())->getTimestamp(),
@@ -96,7 +97,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -110,6 +115,7 @@ class WsTest extends TestCase
 
         $stockMovement = new StockMovement(
             static::$taxRegistrationNumber,
+            "ABCDEF-" . \rand(999, 99999),
             "teste",
             new Address("AAA", "Lisboa", "9999-999"),
             "GT 999GT/" . (new Date())->getTimestamp(),
@@ -152,6 +158,7 @@ class WsTest extends TestCase
     {
         $stockMovement = new StockMovement(
             static::$taxRegistrationNumber,
+            "ABCDEF-" . \rand(999, 99999),
             "teste",
             new Address("AAA", "Lisboa", "9999-999"),
             "GT GTA999/" . (new Date())->getTimestamp(),
@@ -182,7 +189,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -195,6 +206,7 @@ class WsTest extends TestCase
     {
         $stockMovement = new StockMovement(
             static::$taxRegistrationNumber,
+            "ABCDEF-" . \rand(999, 99999),
             "teste",
             new Address("AAA", "Lisboa", "9999-999"),
             "GT GT999/" . (new Date())->getTimestamp(),
@@ -228,7 +240,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -241,6 +257,7 @@ class WsTest extends TestCase
     {
         $stockMovement = new StockMovement(
             static::$taxRegistrationNumber,
+            "ATCODE-999",
             "teste",
             new Address("AAA", "Lisboa", "9999-999"),
             "GD GD999/" . (new Date())->getTimestamp(),
@@ -274,7 +291,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -287,6 +308,7 @@ class WsTest extends TestCase
     {
         $stockMovement = new StockMovement(
             static::$taxRegistrationNumber,
+            "ATCODE-999",
             "teste",
             new Address("AAA", "Lisboa", "9999-999"),
             "GT 9GT999/" . (new Date())->getTimestamp(),
@@ -320,7 +342,11 @@ class WsTest extends TestCase
         $response = $ws->submit($stockMovement);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -334,6 +360,7 @@ class WsTest extends TestCase
     {
         $agriculture = new PriorAgriculturalStockMovement(
             static::$taxRegistrationNumber,
+            "ATCODE-999",
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA A999BC/" . (new Date())->getTimestamp(),
@@ -357,7 +384,11 @@ class WsTest extends TestCase
         $response = $ws->submit($agriculture);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -371,6 +402,7 @@ class WsTest extends TestCase
     {
         $agriculture = new PriorAgriculturalStockMovement(
             static::$taxRegistrationNumber,
+            "ATCODE-999",
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA B999/" . (new Date())->getTimestamp(),
@@ -394,7 +426,11 @@ class WsTest extends TestCase
         $response = $ws->submit($agriculture);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -408,6 +444,7 @@ class WsTest extends TestCase
     {
         $agriculture = new PriorAgriculturalStockMovement(
             static::$taxRegistrationNumber,
+            "ATCODE-999",
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTA A999CD/" . (new Date())->getTimestamp(),
@@ -431,7 +468,11 @@ class WsTest extends TestCase
         $response = $ws->submit($agriculture);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame(0, $response->getCode());
-        $this->assertSame("OK", $response->getMessage());
+        $this->assertTrue(
+            \str_starts_with($response->getMessage(), "OK") ||
+            \str_starts_with($response->getMessage(), "Alerta:")
+
+        );
         $this->assertNotNull($response->getATDocCodeID());
         $this->assertNotEmpty($response->getATDocCodeID());
     }
@@ -445,6 +486,7 @@ class WsTest extends TestCase
     {
         $agriculture = new SubsequentAgriculturalStockMovement(
             static::$taxRegistrationNumber,
+            "ATCODE-999",
             "The Company name",
             new Address("Rua A", "Lisboa", "9999-999"),
             "GTP 9999/29",

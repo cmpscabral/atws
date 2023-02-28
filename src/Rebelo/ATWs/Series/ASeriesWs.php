@@ -44,13 +44,12 @@ abstract class ASeriesWs extends AATWs
     /**
      * Get the Webservice location
      * @return string
-     * @throws \Rebelo\ATWs\ATWsException
      * @since 1.0.0
      */
     public function getWsLocation(): string
     {
         return $this->isTest ?
             "https://servicos.portaldasfinancas.gov.pt:722/SeriesWSService" :
-            throw new ATWsException("Production WSDL not defined by AT");
+            "https://servicos.portaldasfinancas.gov.pt:422/SeriesWSService";
     }
 }
